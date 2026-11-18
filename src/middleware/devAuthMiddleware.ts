@@ -6,7 +6,7 @@ export const devAuthMiddleware = (
   next: express.NextFunction,
 ) => {
   req.user = {
-    id: "123",
+    id: "1",
     role: "USER",
   };
   next();

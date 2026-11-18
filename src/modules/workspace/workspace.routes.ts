@@ -1,8 +1,8 @@
 import { Router } from "express";
-import { getWorkspaces } from "./workspace.controller";
+import * as workspaceController from "./workspace.controller";
 
 const workspaceRoutes = Router();
 
-workspaceRoutes.get("/", getWorkspaces);
-
+workspaceRoutes.get("/", workspaceController.getAllWorkspaces);
+workspaceRoutes.get("/:workspace_id", workspaceController.getWorkspace);
 export default workspaceRoutes;
