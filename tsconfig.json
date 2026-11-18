@@ -1,20 +1,17 @@
 {
-    "compilerOptions": {
-        "target": "ES2022",
-        "module": "CommonJS",
-        "moduleResolution": "Node",
-        "ignoreDeprecations": "6.0",
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "CommonJS",
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmitOnError": true,
 
-        "rootDir": "./src",
-        "outDir": "./dist",
-
-        "strict": true,
-        "esModuleInterop": true,
-        "skipLibCheck": true,
-        "forceConsistentCasingInFileNames": true,
-
-        "noEmitOnError": true
-    },
-    "include": ["src/**/*.ts"],
-    "exclude": ["node_modules", "dist", "tests"]
+    // Add this line to explicitly point to your custom types folder
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules", "dist", "tests"]
 }
