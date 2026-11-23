@@ -1,0 +1,67 @@
+Craeating a workspace
+
+--
+users:
+== 1 ==
+id = 10
+name = user10
+========
+== 2 ==
+id = 20
+name = user20
+========
+--
+
+--
+workspace:
+== 1 ==
+id = 1
+name = ws_1
+created_by : user10
+==
+--
+
+--
+workspace_members
+== 1 ==
+id = 100
+ref: ws -> (id:1, name:ws_1)
+ref user -> (10, user10)
+role: admin
+==
+== 2 ==
+id = 101
+ref: ws -> (id:1, name:ws_1)
+ref user -> (10, user10)
+role: member
+==
+--
+
+SELECT w.id AS workspace_id,
+  w.name,
+  wm.role,
+  wm.joined_at
+FROM workspace_members AS wm,
+INNER JOIN workspaces AS w,
+ON w.id = wm.workspace_id,
+WHERE wm.user_id = $1,
+ORDER BY wm.joined_at ASC;
+
+- once the owner deletes his account 
+
+- if an owner of a workspace deleted their account, Transfer ownership to the longest-standing member of the workspace, and set workspaces.created_by to that member as well (**note**: as the original owner is the longest standing member we should select the second longest standing member)
+- if the workspace has only one member who is the owner, then it could be deleted simply.
+
+- a workspace roles
+  - if an owner makes another member owner he will lose his ownership and becomes a moderator.
+  - a moderator can make upgrade another member to moderator.
+  - a moderator cannot make demote another moderator to a member.
+  - self demoting is not possible.
+  - if a member leaves the workspace it should be removed from the workspace_members.
+  - if an owner leaves a workspace, the ownership will be transferer.
+
+- Undertood the relationship between workspaces & workspace_members
+  - now i should be good to start implementing the workspace thing
+
+- decided that i am gonna implement a in-memory cache to prevent repeated same queries to the database
+	- 

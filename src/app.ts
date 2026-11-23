@@ -1,14 +1,14 @@
 import express, { type Request, type Response } from "express";
-import { devAuthMiddleware } from "./middleware/devAuthMiddleware";
-import workspaceRoutes from "./modules/workspace/workspace.routes";
-import pool from "./config/database";
+import { devAuthMiddleware } from "./middleware/devAuthMiddleware.ts";
+import workspaceRoutes from "./modules/workspace/workspace.routes.ts";
+import pool from "./config/database.ts";
 
 const app = express();
 
 app.use(express.json());
 app.use(devAuthMiddleware);
 
-app.use("/api/workspaces", workspaceRoutes);
+app.use("/api/v1/workspaces", workspaceRoutes);
 
 app.get("/health", async (req: Request, res: Response) => {
   try {
